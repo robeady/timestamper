@@ -2,7 +2,7 @@ import time
 import os
 
 def fmt_timestamp(timestamp):
-    return f"{int(timestamp) // 60}:{(timestamp % 60):04.1f}"
+    return f"{int(timestamp) // 60:02d}:{int(timestamp % 60):02d}"
 
 def main():
     timestamps = []
@@ -21,26 +21,24 @@ def main():
 
     while True:
         # get key pressed by user
-        key = input("Press 'q' to quit and save, or return to stamp: ")
-        if key == "q":
+        line = input("Press 'q' to quit and save, r to reset, or a comment to stamp: ")
+        if line == "q":
             # write timestamps to file then exit
             with open(filename, "w") as f:
                 if desc:
                     f.write(f"{desc}\n")
-                for timestamp in timestamps:
-                    f.write(fmt_timestamp(timestamp) + "\n")
+                for (timestamp, remark) in timestamps:
+                    f.write(fmt_timestamp(timestamp) + " " + remark + "\n")
             return
-
-        elif key == "":
-            now = time.time()
-            stamp = now - start
-            timestamps.append(stamp)
-            print(f"Stamp {len(timestamps)}: {fmt_timestamp(stamp)}")
-
-        elif key == "r":
+        elif line == "r":
             print("Resetting")
             start = time.time()
             timestamps = []
+        else:
+            now = time.time()
+            stamp = now - start
+            timestamps.append((stamp, line))
+            print(f"Stamp {len(timestamps)}: {fmt_timestamp(stamp)} {line}")
 
 
 if __name__ == "__main__":

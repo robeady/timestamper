@@ -1,0 +1,2 @@
+global-hotkeys==0.0.4
+pywin32==304

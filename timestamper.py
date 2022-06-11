@@ -44,7 +44,7 @@ class Timestamper:
         while True:
             # get key pressed by user
             line = input("Press 'q' to quit and save, r to reset, or a comment to stamp:\n")
-            if line == "q":
+            if line in ["q", "Q"]:
                 # write timestamps to file then exit
                 with open(self.filename, "w") as f:
                     if self.desc:
@@ -53,7 +53,7 @@ class Timestamper:
                         f.write(fmt_timestamp(timestamp, remark) + "\n")
                 print("Saved to", self.filename)
                 return
-            elif line == "r":
+            elif line in ["r", "R"]:
                 self.reset_timing()
             else:
                 self.record_timestamp(line)

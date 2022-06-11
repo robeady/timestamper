@@ -1,8 +1,13 @@
 import time
 import os
 
-def fmt_timestamp(timestamp):
-    return f"{int(timestamp) // 60:02d}:{int(timestamp % 60):02d}"
+def fmt_timestamp(timestamp, remark):
+    # convert to hours, minutes and seconds
+    hours = int(timestamp / 3600)
+    hours_text = f"{hours}:" if hours else ""
+    minutes = int((timestamp % 3600) / 60)
+    seconds = int(timestamp % 60)
+    return f"{hours_text}{minutes:02d}:{seconds:02d} {remark or ''}"
 
 def main():
     timestamps = []
@@ -17,7 +22,7 @@ def main():
         print("Warning, file already exists")
 
     # start timing
-    start = time.time()
+    start = time.time() - 20 * 60
 
     while True:
         # get key pressed by user
@@ -28,7 +33,7 @@ def main():
                 if desc:
                     f.write(f"{desc}\n")
                 for (timestamp, remark) in timestamps:
-                    f.write(fmt_timestamp(timestamp) + " " + remark + "\n")
+                    f.write(fmt_timestamp(timestamp, remark) + "\n")
             return
         elif line == "r":
             print("Resetting")
@@ -38,7 +43,7 @@ def main():
             now = time.time()
             stamp = now - start
             timestamps.append((stamp, line))
-            print(f"Stamp {len(timestamps)}: {fmt_timestamp(stamp)} {line}")
+            print(f"Stamp {len(timestamps)} - {fmt_timestamp(stamp, line)}")
 
 
 if __name__ == "__main__":

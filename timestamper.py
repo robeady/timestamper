@@ -22,7 +22,7 @@ def main():
         print("Warning, file already exists")
 
     # start timing
-    start = time.time() - 20 * 60
+    start = time.time()
 
     while True:
         # get key pressed by user
@@ -31,7 +31,7 @@ def main():
             # write timestamps to file then exit
             with open(filename, "w") as f:
                 if desc:
-                    f.write(f"{desc}\n")
+                    f.write(desc + "\n")
                 for (timestamp, remark) in timestamps:
                     f.write(fmt_timestamp(timestamp, remark) + "\n")
             return

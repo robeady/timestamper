@@ -6,7 +6,7 @@ It is designed to help you catch interesting moments when you are recording a vi
 
 ## Installation
 
-Create and activate a virtualenv and `pip install requirements.txt`
+Create and activate a virtualenv and `pip install -r requirements.txt`
 
 ## Usage
 
@@ -21,4 +21,4 @@ Then the following commands are available:
 - `q` to save the timestamps recorded to a text file and exit.
 - any other text to save a timestamp at the current moment, with the given text as a remark.
 
-Global hotkeys `ctrl-alt-r` and `ctrl-alt-t` are also available for resetting and saving a timestamp, in case you are in another full screen application.
+Global hotkeys `ctrl-alt-r` and `ctrl-alt-s` are also available for resetting and saving a timestamp, in case you are in another full screen application.

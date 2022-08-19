@@ -24,7 +24,8 @@ class Timestamper:
 
         self.reset_timing()
 
-        register_hotkey("t", ["control", "alt"], self.record_timestamp)
+        # :KeepKeybindsSynced
+        register_hotkey("s", ["control", "alt"], self.record_timestamp)
         register_hotkey("r", ["control", "alt"], self.reset_timing)
         start_checking_hotkeys()
 
@@ -41,9 +42,13 @@ class Timestamper:
         print(f"Stamp {len(self.timestamps)} - {fmt_timestamp(stamp, remark)}")
 
     def input_loop(self):
+        print("global hotkeys")
+        # :KeepKeybindsSynced
+        print("ctrl alt s: record timestamp")
+        print("ctrl alt r: reset timing")
         while True:
             # get key pressed by user
-            line = input("Press 'q' to quit and save, r to reset, or a comment to stamp:\n")
+            line = input("Enter 'q' to quit and save, 'r' to reset, or a comment to stamp:\n")
             if line in ["q", "Q"]:
                 # write timestamps to file then exit
                 with open(self.filename, "w") as f:
